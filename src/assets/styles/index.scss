@@ -1,0 +1,40 @@
+$color: red;
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+}
+
+
+.main {
+  overflow: hidden;
+  margin: 0 auto;
+  // padding: 16px 20px 0;
+  // width: 100%;
+
+  & > div:nth-child(2) {
+    margin-top: 57px;
+  }
+}
+
+footer {
+  margin: 20px auto 0;
+  padding: 0 16px;
+  // width: 100%;
+}
+
+button.primary {
+  margin-top: 16px;
+  padding: 0 16px;
+  line-height: 32px;
+  border: 0;
+  border-radius: 3px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  color: #fff;
+  background-color: #0f88eb;
+}
