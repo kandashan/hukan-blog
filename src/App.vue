@@ -11,7 +11,6 @@
 <script>
 export default {
   name: 'app',
-  props: ['message'],
   data () {
     return {
       msg: 'hello',

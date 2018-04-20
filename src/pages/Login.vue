@@ -48,6 +48,7 @@
 
 <script>
 import axios from 'axios';
+import {config} from '../assets/scripts/config.js';
 
 export default {
   name: 'login',
@@ -62,7 +63,9 @@ export default {
   },
   methods: {
     login () {
-      axios.get('http://localhost:9000/users?username=' + this.form.username)
+      let _this = this;
+
+      axios.get('http://' + config.host + ':'+ config.port +'/users?username=' + this.form.username)
         .then(function(response){
           console.log(response.data[0]);
           if(response.data[0].password === this.form.password){
@@ -78,6 +81,8 @@ export default {
             localStorage.userInfo = JSON.stringify(userInfo);
             this.$router.push({ path: '/' });
           }
+
+          _this.$store.commit('login');
         }.bind(this))
         .catch(function(error){
           console.log(error);

@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import App from './App'
 import router from './router'
+import store from './store/index'
 import moment from 'moment'
 // import ElementUI from 'element-ui'
 // 1.0
@@ -61,17 +62,6 @@ Number.prototype.format = function() {
 Vue.filter('moment', function(value, formatString) {
     formatString = formatString || 'YYYY-MM-DD HH:mm:ss';
     return moment(value).format(formatString);
-});
-
-const store = new Vuex.Store({
-    state: {
-        count: 0
-    },
-    mutations: {
-        increment(state) {
-            state.count++;
-        }
-    }
 });
 
 /* eslint-disable no-new */
