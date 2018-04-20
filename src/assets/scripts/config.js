@@ -1,11 +1,11 @@
 const host = 'localhost',
-  port = 9000;
+    port = 9004;
 
 const config = {
-  host: host,
-  port: port
+    host: host,
+    port: port
 }
 
 export {
-  config
+    config
 }
