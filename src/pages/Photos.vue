@@ -113,7 +113,6 @@ export default {
     img {
       display: block;
       margin: 100px auto 0;
-      width: 600px;
     }
   }
 }

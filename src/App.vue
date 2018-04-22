@@ -2,9 +2,6 @@
   <div class="app">
     <!-- <img src="./assets/logo.png"> -->
     <router-view></router-view>
-    <footer>
-      页脚
-    </footer>
   </div>
 </template>
 

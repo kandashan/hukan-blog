@@ -4,7 +4,7 @@
       <span class="header-title">我的</span>
     </Blogheader>
     <div class="mine-info">
-      <div class="mine-info-person" v-if="logined">
+      <router-link class="mine-info-person" v-if="logined" to="/userInfo">
         <div class="mine-info-person-header">
           <img src="" alt="">
         </div>
@@ -13,7 +13,7 @@
           <span>巨蟹座</span>
           <span>我自横刀向天笑,笑完我就去睡觉</span>
         </div>
-      </div>
+      </router-link>
       <div v-else>
         <router-link to="/login">点击登陆</router-link>
       </div>

@@ -128,7 +128,6 @@ li {
   .left {
     float: left;
     box-sizing: border-box;
-    // width: 640px;
 
     .concent {
       // margin-top: 20px;

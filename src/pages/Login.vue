@@ -1,9 +1,9 @@
 <template>
   <div class="main">
     <div class="title">
-      <h3>登陆</h3>
+      <h3>登录</h3>
     </div>
-    <div class="login-label">
+    <div class="entry-label">
 
       <form action="#">
         <div>
@@ -19,7 +19,7 @@
           <input type="password" v-model="form.password">
         </div>
         <div>
-          <button @click="login">登陆</button>
+          <button @click="login">登录</button>
         </div>
       </form>
     </div>
@@ -28,21 +28,6 @@
         <router-link to="/register">新用户注册</router-link>
       </p>
     </div>
-    <!-- <el-row :gutter="24">
-      <el-col :span="8" :offset="2">
-        <el-form ref="form" :model="form" label-width="80px">
-          <el-form-item label="用户名">
-            <el-input size="small" v-model="form.username"></el-input>
-          </el-form-item>
-          <el-form-item label="密码">
-            <el-input size="small" v-model="form.password"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="login">登录</el-button>
-          </el-form-item>
-        </el-form>
-      </el-col>
-    </el-row> -->
   </div>
 </template>
 
@@ -54,7 +39,7 @@ export default {
   name: 'login',
   data () {
     return {
-      msg: '登陆页',
+      msg: '登录页',
       form: {
         username: '',
         password: ''

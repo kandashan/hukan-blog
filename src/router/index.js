@@ -10,10 +10,12 @@ import Photos from '@/pages/Photos'
 import ArticleTypes from '@/pages/ArticleTypes'
 import Search from '@/pages/Search'
 import Mine from '@/pages/Mine'
+import UserInfo from '@/pages/UserInfo'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -64,6 +66,11 @@ export default new Router({
       path: '/mine',
       name: 'Mine',
       component: Mine
+    },
+    {
+      path: '/userInfo',
+      name: 'UserInfo',
+      component: UserInfo
     }
   ]
 })
