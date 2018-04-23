@@ -7,20 +7,20 @@
       </router-link>
     </div>
     <div class="navbar-nav">
-      <i class="fa fa-home"></i>
+      <i class="fa fa-compass"></i>
       <router-link to="/articleTypes">
         发现
       </router-link>
     </div>
 
     <div class="navbar-nav">
-      <i class="fa fa-home"></i>
+      <i class="fa fa-bell-o"></i>
       <router-link to="/photos">
         消息
       </router-link>
     </div>
     <div class="navbar-nav">
-      <i class="fa fa-home"></i>
+      <i class="fa fa-user-o"></i>
       <router-link to="/mine">
         我的
       </router-link>
@@ -65,7 +65,7 @@ export default {
       color: #5d656b;
 
       i {
-        font-size: 24px;
+        // font-size: 24px;
       }
 
       a {

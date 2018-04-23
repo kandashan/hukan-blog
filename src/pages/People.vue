@@ -114,7 +114,7 @@ export default {
 
           .user-info-text-name {
             font-size: 24px;
-            font-weight: 600;
+            font-weight: bold;
           }
 
           .user-info-text-constellation {

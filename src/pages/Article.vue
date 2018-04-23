@@ -2,6 +2,7 @@
   <div class="main">
     <!-- {{ $route.params.id }} -->
     <div class="article-content">
+      <!-- 文章内容 -->
       <div class="article-header">
         <!-- 头像，用户名等 -->
         <router-link :to="'/people/' + article.user.id">{{ article.user.username }}</router-link>
@@ -23,6 +24,7 @@
       </div>
     </div>
     <div class="comment-area">
+      <!-- 评论列表 -->
       <div class="comment-publish" v-if="logined">
         <div class="comment-publish-header">
           <router-link :to="'/people/' + userInfo.id">{{ userInfo.username }}</router-link>
@@ -43,6 +45,25 @@
           {{ comment.time | moment }}
           {{ comment.text }}
         </div>
+      </div>
+    </div>
+    <div class="article-footer">
+      <!-- 功能区 -->
+      <div class="navbar-nav">
+        <i class="fa fa-gift"></i>
+        <a href="javascript:;">赞赏</a>
+      </div>
+      <div class="navbar-nav">
+        <i class="fa fa-comment-o"></i>
+        <a href="javascript:;">评论</a>
+      </div>
+      <div class="navbar-nav">
+        <i class="fa fa-heart-o"></i>
+        <a href="javascript:;">喜欢</a>
+      </div>
+      <div class="navbar-nav">
+        <i class="fa fa-share-alt"></i>
+        <a href="javascript:;">分享</a>
       </div>
     </div>
   </div>
@@ -90,8 +111,11 @@ export default {
         });
     },
     getUserInfo: function(){
-      if(localStorage.userInfo){
+      if(this.$store.state.logined){
         this.logined = true;
+      }
+
+      if(localStorage.userInfo){
         this.userInfo = JSON.parse(localStorage.userInfo);
       }
     },
@@ -141,7 +165,7 @@ export default {
 
   .article-content {
     margin-bottom: 24px;
-    width: 640px;
+    padding: 0 14px;
 
     .article-header {
       margin-bottom: 12px;
@@ -175,7 +199,7 @@ export default {
   }
 
   .comment-area {
-    width: 640px;
+    padding: 0 14px;
 
     .comment-publish {
       padding-top: 16px;
@@ -199,12 +223,49 @@ export default {
         display: block;
         padding: 12px 16px;
         box-sizing: border-box;
-        width: 600px;
+        width: 100%;
         height: 100px;
       }
     }
     .comment-list {
 
+    }
+  }
+
+  /* 功能区 */
+  .article-footer {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    box-sizing: border-box;
+    border-top: 1px solid #e7e7e7;
+    width: 100%;
+    height: 45px;
+    background-color: #fff;
+
+    .navbar-nav {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 20%;
+      line-height: 45px;
+      text-align: center;
+      color: #5d656b;
+
+      i {
+        // font-size: 24px;
+      }
+
+      a {
+        display: inline-block;
+        height: 20px;
+        line-height: 20px;
+        text-decoration: none;
+        font-size: 12px;
+        color: #5d656b;
+      }
     }
   }
 }
