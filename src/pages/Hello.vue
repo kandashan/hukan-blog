@@ -11,7 +11,7 @@
           <div v-if="articles.length === 0" :key="0">
             暂无文章
           </div>
-          <div class="article-content" v-else v-for="(article, index) in articles" :key="article.id" v-on:mouseover.capture="showCloseButton($event)" v-on:mouseout.capture="hideCloseButton">
+          <div class="article-content" v-else v-for="(article) in articles" :key="article.id" v-on:mouseover.capture="showCloseButton($event)" v-on:mouseout.capture="hideCloseButton">
             <div class="article-header">
               <!-- 头像，用户名等 -->
               <router-link :to="'/people/' + article.user.id">{{article.user.username}}</router-link>

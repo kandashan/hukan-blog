@@ -1,13 +1,13 @@
 let Mock = require('mockjs');
 let Random = Mock.Random;
 
-module.exports = function () {
+module.exports = function() {
     // 扩展方法
     Random.extend({
-      constellation: function (date) {
-        var constellations = ['白羊座', '金牛座', '双子座', '巨蟹座', '狮子座', '处女座', '天秤座', '天蝎座', '射手座', '摩羯座', '水瓶座', '双鱼座']
-        return this.pick(constellations)
-      }
+        constellation: function(date) {
+            var constellations = ['白羊座', '金牛座', '双子座', '巨蟹座', '狮子座', '处女座', '天秤座', '天蝎座', '射手座', '摩羯座', '水瓶座', '双鱼座']
+            return this.pick(constellations)
+        }
     })
 
     // var data = {
@@ -70,62 +70,67 @@ module.exports = function () {
     // }
 
     var template = {
-        'users': function(){
-          var users = [{
-            'id': 0,
-            'username': 'Silvester',
-            'password': '123456',
-            'email': 'silvesterchiao@foxmail.com',
-            'regdate': '2015-09-04',
-            'word': '天上不知人间事，雨雪纷纷入悲秋',
-            'constellation': '巨蟹座',
-            'portrait': Random.image('200x200')
-          }];
-          for(var i = 0; i < 9; i ++){
-            users.push({
-              id: i + 1,
-              username: Random.cname(),
-              password: Random.word(6, 16),
-              email: Random.email(),
-              regdate: Random.date(),
-              word: Random.csentence(5, 16),
-              constellation: Random.constellation(),
-              portrait: Random.image('200x200')
-            })
-          }
+        'users': function() {
+            var users = [{
+                'id': 0,
+                'username': 'Silvester',
+                'password': '123456',
+                'email': 'silvesterchiao@foxmail.com',
+                'regdate': '2015-09-04',
+                'word': '天上不知人间事，雨雪纷纷入悲秋',
+                'constellation': '巨蟹座',
+                'portrait': Random.image('200x200')
+            }, {
+                'id': 1,
+                'username': 'Kumamon',
+                'password': 'cyj123',
+                'email': '1959252533@qq.com',
+                'regdate': '2018-4-20',
+                'word': 'XXXXXXX',
+                'constellation': '白羊座',
+                'portrait': Random.image('200x200')
+            }];
+            for (var i = 0; i < 9; i++) {
+                users.push({
+                    id: i + 2,
+                    username: Random.cname(),
+                    password: Random.word(6, 16),
+                    email: Random.email(),
+                    regdate: Random.date(),
+                    word: Random.csentence(5, 16),
+                    constellation: Random.constellation(),
+                    portrait: Random.image('200x200')
+                })
+            }
 
-          return users;
+            return users;
         },
-        'articles|10': [
-          {
+        'articles|10': [{
             'id|+1': 0,
             'title': '@CPARAGRAPH',
-            'time': function(){
-              var t = Date.now();
-              return t;
+            'time': function() {
+                var t = Date.now();
+                return t;
             },
             'userId|0-9': 1,
             'type': '@PICK(@/types)',
             'visitedAmount': 0
-          }
-        ],
-        'comments|20': [
-          {
+        }],
+        'comments|20': [{
             'id|+1': 0,
-            'time': function(){
-              var t = Date.now();
-              return t;
+            'time': function() {
+                var t = Date.now();
+                return t;
             },
             'text': '@CPARAGRAPH(1, 3)',
             'userId|0-9': 1,
             'articleId|0-9': 1
-          }
-        ],
+        }],
         'types': [
-          '前端',
-          '后端',
-          '产品',
-          '设计'
+            '前端',
+            '后端',
+            '产品',
+            '设计'
         ]
     }
 
