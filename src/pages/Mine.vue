@@ -88,8 +88,31 @@ export default {
 
 <style lang="scss" scoped>
   .main {
+    background-color: #f2f2f2;
+
+    .mine-info {
+      margin-bottom: 10px;
+
+      .mine-info-article {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 14px 0;
+        border-top: 1px solid #e1e1e1;
+        border-bottom: 1px solid #e1e1e1;
+        background-color: #fff;
+
+        div {
+          line-height: 25px;
+          text-align: center;
+        }
+      }
+    }
 
     .mine-article-info {
+      border-top: 1px solid #e1e1e1;
+      background-color: #fff;
 
       ul {
         list-style: none;

@@ -40,10 +40,8 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Blogheader from '../components/Blogheader';
 import Navbar from '../components/Navbar';
-import {config} from '../assets/scripts/config.js';
 
 export default {
   name: 'articleTypes',
@@ -57,7 +55,7 @@ export default {
   methods: {
     getArticlesByType(type){
       var _this = this;
-      axios.get('http://' + config.host + ':'+ config.port +'/articles?type=' + type + '&_expand=user')
+      this.$ajax.get('/api/articles?type=' + type + '&_expand=user')
         .then(function(response){
           this.articles = response.data;
           console.log(response);
@@ -67,7 +65,7 @@ export default {
         });
     },
     getTypes(){
-      axios.get('http://' + config.host + ':' + config.port + '/types')
+      this.$ajax.get('/api/types')
         .then(function(response){
           this.types = response.data;
           console.log(response);

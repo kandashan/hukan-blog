@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
   name: 'people',
@@ -52,7 +51,7 @@ export default {
   },
   methods: {
     getInfo(){
-      axios.get('http://localhost:9000/users?id=' + this.$route.params.id + '&_embed=articles')
+      this.$ajax.get('/api/users?id=' + this.$route.params.id + '&_embed=articles')
         .then(function(response){
           this.userInfo = response.data[0];
         }.bind(this))
@@ -76,7 +75,7 @@ export default {
   .people {
     margin: 0 auto;
     padding-bottom: 10px;
-    width: 1000px;
+    width: 100%;
 
     .user-info {
       border-radius: 4px;

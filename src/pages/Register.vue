@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
   name: "register",
@@ -52,8 +51,7 @@ export default {
         password: this.form.password
       };
 
-      axios
-        .post("http://localhost:3000/users", newUser)
+      this.$ajax.post("/api/users", newUser)
         .then(function(response) {
           console.log(response);
         })

@@ -32,8 +32,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-import {config} from '../assets/scripts/config.js';
 
 export default {
   name: 'login',
@@ -50,7 +48,7 @@ export default {
     login () {
       let _this = this;
 
-      axios.get('http://' + config.host + ':'+ config.port +'/users?username=' + this.form.username)
+      this.$ajax.get('/api/users?username=' + this.form.username)
         .then(function(response){
           console.log(response.data[0]);
           if(response.data[0].password === this.form.password){
@@ -63,6 +61,7 @@ export default {
               constellation: response.data[0].constellation,
               email: response.data[0].email
             };
+            localStorage.logined = true;
             localStorage.userInfo = JSON.stringify(userInfo);
             this.$router.push({ path: '/' });
           }

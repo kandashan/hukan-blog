@@ -39,6 +39,7 @@
       <div class="comment-list">
         <div class="comment-list-title">
           {{ comments.length }}条评论
+          {{ logined1 }}
         </div>
         <div class="comment-content" v-for="comment in comments" :key="comment.id">
           {{ comment.user.username }}
@@ -70,11 +71,9 @@
 </template>
 
 <script>
-import axios from 'axios';
-import {config} from '../assets/scripts/config.js';
 
 export default {
-  name: 'article',
+  name: 'articleList',
   data(){
     return {
       msg: 'article',
@@ -87,9 +86,15 @@ export default {
       commentPublishText: '写下你的观点...'
     }
   },
+  computed: {
+    logined1(){
+      var logined = localStorage.logined;
+      return this.$store.state.logined || logined;
+    }
+  },
   methods: {
     getArticle(){
-      this.$ajax.get('http://' + config.host + ':' + config.port +'/articles?id=' + this.$route.params.id + '&_expand=user')
+      this.$ajax.get('/api/articles?id=' + this.$route.params.id + '&_expand=user')
         .then(function(response){
           console.log('1');
           console.log(JSON.stringify(response.data));
@@ -101,7 +106,7 @@ export default {
         });
     },
     getComments(){
-      this.$ajax.get('http://' + config.host + ':' + config.port + '/articles/' + this.$route.params.id + '/comments?&_expand=user')
+      this.$ajax.get('/api/articles/' + this.$route.params.id + '/comments?&_expand=user')
         .then(function(response){
           this.comments = response.data;
           console.log(response.data);
@@ -111,11 +116,8 @@ export default {
         });
     },
     getUserInfo: function(){
-      if(this.$store.state.logined){
+      if(this.$store.state.logined || localStorage.userInfo){
         this.logined = true;
-      }
-
-      if(localStorage.userInfo){
         this.userInfo = JSON.parse(localStorage.userInfo);
       }
     },
@@ -126,7 +128,7 @@ export default {
         userId: Number(this.userInfo.id),
         articleId: Number(this.$route.params.id)
       };
-      this.$ajax.post('http://'+ config.host + ':' + config.port + '/comments', newComment)
+      this.$ajax.post('/api/comments', newComment)
         .then(function(response){
           console.log(response);
           this.getComments();
@@ -139,7 +141,7 @@ export default {
     visitArticle(){
       var _this = this;
       // 访问量增加1
-      axios.patch('http://'+ config.host + ':' + config.port + '/articles/' + _this.$route.params.id, {
+      axios.patch('/api/articles/' + _this.$route.params.id, {
         visitedAmount: ++ _this.article.visitedAmount
       })
         .then(function(response){

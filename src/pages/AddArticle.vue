@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+
 export default {
   name: 'addActicle',
   data(){
@@ -35,11 +35,12 @@ export default {
         visitedAmount: 0
       };
 
-      axios.post('http://localhost:9000/articles', newArticle)
+      this.$ajax.post('/api/articles', newArticle)
         .then(function(response){
           console.log(response);
-          _this.$message('发布成功');
-          _this.$router.push({ path: '/' });
+          _this.$messagebox.alert('操作成功').then(function(){
+            _this.$router.push({ path: '/' });
+          });
         }).catch(function(error){
           console.log(error);
         });
