@@ -1,8 +1,7 @@
 {
-    "name": "blog-vue",
+    "name": "bidder",
     "version": "1.0.0",
     "description": "A blog by vuejs",
-    "author": "SilvesterChiao <SilvesterChiao@gmail.com>",
     "private": true,
     "scripts": {
         "dev": "node build/dev-server.js",
