@@ -1,49 +1,50 @@
 <template>
-  <div class="navbar">
-    <div class="navbar-nav">
-      <i class="fa fa-home"></i>
-      <router-link to="/" exact>
-        首页
-      </router-link>
-    </div>
-    <div class="navbar-nav">
-      <i class="fa fa-compass"></i>
-      <router-link to="/articleTypes">
-        发现
-      </router-link>
-    </div>
+    <div class="navbar">
+        <div class="navbar-nav">
+            <i class="fa fa-home"></i>
+            <router-link to="/"
+                         exact>
+                首页
+            </router-link>
+        </div>
+        <div class="navbar-nav">
+            <i class="fa fa-compass"></i>
+            <router-link to="/articleTypes">
+                发现
+            </router-link>
+        </div>
 
-    <div class="navbar-nav">
-      <i class="fa fa-bell-o"></i>
-      <router-link to="/photos">
-        消息
-      </router-link>
+        <div class="navbar-nav">
+            <i class="fa fa-bell-o"></i>
+            <router-link to="/photos">
+                消息
+            </router-link>
+        </div>
+        <div class="navbar-nav">
+            <i class="fa fa-user-o"></i>
+            <router-link to="/mine">
+                我的
+            </router-link>
+        </div>
     </div>
-    <div class="navbar-nav">
-      <i class="fa fa-user-o"></i>
-      <router-link to="/mine">
-        我的
-      </router-link>
-    </div>
-  </div>
 </template>
 
 <script>
 export default {
-  name: 'navbar',
-  data(){
-    return {
-      msg: 'navbar'
-    }
-  },
-  methods: {
+    name: 'navbar',
+    data () {
+        return {
+            msg: 'navbar'
+        }
+    },
+    methods: {
 
-  }
+    }
 }
 </script>
 
 <style lang="scss" scoped>
-  .navbar {
+.navbar {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
@@ -56,26 +57,30 @@ export default {
     background-color: #fff;
 
     .navbar-nav {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      width: 20%;
-      line-height: 45px;
-      text-align: center;
-      color: #5d656b;
-
-      i {
-        // font-size: 24px;
-      }
-
-      a {
-        display: inline-block;
-        height: 20px;
-        line-height: 20px;
-        text-decoration: none;
-        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 20%;
+        line-height: 45px;
+        text-align: center;
         color: #5d656b;
-      }
+
+        i {
+            // font-size: 24px;
+        }
+
+        a {
+            display: inline-block;
+            height: 20px;
+            line-height: 20px;
+            text-decoration: none;
+            font-size: 12px;
+            color: #5d656b;
+
+            &.router-link-active {
+                color: #26a2ff;
+            }
+        }
     }
-  }
+}
 </style>
