@@ -1,13 +1,14 @@
 <template>
-  <header>
-    <div class="header-inner">
-      <slot>
-        <span class="header-title">首页</span>
-      </slot>
-      <div class="header-tool">
-        <i class="fa fa-search"></i>
-      </div>
-      <!-- <nav>
+    <header>
+        <div class="header-inner">
+            <slot>
+                <span class="header-title">首页</span>
+            </slot>
+            <div class="header-tool">
+                <i class="fa fa-search" aria-hidden="true" @click="toSearch"></i>
+                <i class="fa fa-plus-circle" aria-hidden="true" @click="toPublishArticel"></i>
+            </div>
+            <!-- <nav>
         <ul>
           <li>
             <router-link to="/" exact>首页</router-link>
@@ -39,88 +40,95 @@
           </template>
         </ul>
       </nav> -->
-    </div>
-  </header>
+        </div>
+    </header>
 </template>
 
 <script>
 export default {
-  name: 'Blogheader',
-  data(){
-    return {
-      msg: 'header'
+    name: 'Blogheader',
+    data () {
+        return {
+            msg: 'header'
+        }
+    },
+    methods: {
+        toSearch () {
+            this.$router.push('/search')
+        },
+        toPublishArticel () {
+            this.$router.push('/addArticle')
+        }
     }
-  }
 }
 </script>
 
 <style lang="scss" scoped>
-
 header {
-  position: fixed;
-  width: 100%;
-  height: 56px;
-  border-bottom: 1px solid rgba(30,35,42,.06);
-  box-shadow: 0 1px 3px 0 rgba(0,34,77,.05);
-  background-clip: content-box;
-  background-color: #fff;
-
-  .header-inner {
-    margin: 0 auto;
-    padding: 0 16px;
+    position: fixed;
     width: 100%;
     height: 56px;
-    box-sizing: border-box;
+    border-bottom: 1px solid rgba(30, 35, 42, 0.06);
+    box-shadow: 0 1px 3px 0 rgba(0, 34, 77, 0.05);
+    background-clip: content-box;
+    background-color: #fff;
 
-    .header-title {
-      display: inline-block;
-      height: 56px;
-      line-height: 56px;
-      // color: blue;
-    }
+    .header-inner {
+        margin: 0 auto;
+        padding: 0 16px;
+        width: 100%;
+        height: 56px;
+        box-sizing: border-box;
 
-    .header-tool {
-      float: right;
-      height: 56px;
-      line-height: 56px;
-    }
-
-    nav{
-      overflow: hidden;
-
-      ul {
-        overflow: hidden;
-        list-style-type: none;
-
-        li {
-          float: left;
-          height: 56px;
-          line-height: 56px;
-
-          &.entry {
-            float: right;
-          }
-
-          &:first-child a {
-            padding-left: 0;
-          }
-
-          a {
-            padding: 10px;
-            text-decoration: none;
-            color: #8590a6;
-
-            &:hover {
-              color: #175199;
-            }
-
-            &.router-link-active {
-              color: #333;
-            }
-          }
+        .header-title {
+            display: inline-block;
+            height: 56px;
+            line-height: 56px;
+            // color: blue;
         }
-      }
+
+        .header-tool {
+            float: right;
+            height: 56px;
+            line-height: 56px;
+        }
+
+        nav {
+            overflow: hidden;
+
+            ul {
+                overflow: hidden;
+                list-style-type: none;
+
+                li {
+                    float: left;
+                    height: 56px;
+                    line-height: 56px;
+
+                    &.entry {
+                        float: right;
+                    }
+
+                    &:first-child a {
+                        padding-left: 0;
+                    }
+
+                    a {
+                        padding: 10px;
+                        text-decoration: none;
+                        color: #8590a6;
+
+                        &:hover {
+                            color: #175199;
+                        }
+
+                        &.router-link-active {
+                            color: #333;
+                        }
+                    }
+                }
+            }
+        }
     }
-  }
 }
 </style>

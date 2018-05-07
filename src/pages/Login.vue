@@ -50,9 +50,7 @@ export default {
 
             this.$ajax.get('/api/users?username=' + this.form.username)
                 .then(function (response) {
-                    console.log(response.data[0]);
                     if (response.data[0].password === this.form.password) {
-                        console.log("OK");
                         var userInfo = {
                             id: response.data[0].id,
                             username: response.data[0].username,
@@ -61,8 +59,9 @@ export default {
                             constellation: response.data[0].constellation,
                             email: response.data[0].email
                         };
-                        localStorage.logined = true;
-                        localStorage.userInfo = JSON.stringify(userInfo);
+
+                        localStorage.setItem('logined', true);
+                        localStorage.setItem('userInfo', JSON.stringify(userInfo));
                         _this.$store.commit('login');
                         this.$router.push({ path: '/' });
                     }
