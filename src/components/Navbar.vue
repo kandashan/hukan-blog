@@ -1,31 +1,17 @@
 <template>
     <div class="navbar">
-        <div class="navbar-nav">
-            <i class="fa fa-home"></i>
-            <router-link to="/"
-                         exact>
-                首页
-            </router-link>
-        </div>
-        <div class="navbar-nav">
-            <i class="fa fa-compass"></i>
-            <router-link to="/articleTypes">
-                发现
-            </router-link>
-        </div>
-
-        <div class="navbar-nav">
-            <i class="fa fa-bell-o"></i>
-            <router-link to="/photos">
-                消息
-            </router-link>
-        </div>
-        <div class="navbar-nav">
-            <i class="fa fa-user-o"></i>
-            <router-link to="/mine">
-                我的
-            </router-link>
-        </div>
+        <router-link class="navbar-nav" to="/" exact>
+            <i class="fa fa-fw fa-home"></i>
+        </router-link>
+        <router-link class="navbar-nav" to="/articleTypes">
+            <i class="fa fa-fw fa-compass"></i>
+        </router-link>
+        <router-link class="navbar-nav" to="/photos">
+            <i class="fa fa-fw fa-bell-o"></i>
+        </router-link>
+        <router-link class="navbar-nav" to="/mine">
+            <i class="fa fa-fw fa-user-o"></i>
+        </router-link>
     </div>
 </template>
 
@@ -63,23 +49,15 @@ export default {
         width: 20%;
         line-height: 45px;
         text-align: center;
+        text-decoration: none;
         color: #5d656b;
 
-        i {
-            // font-size: 24px;
+        &.router-link-active {
+            color: #26a2ff;
         }
 
-        a {
-            display: inline-block;
-            height: 20px;
-            line-height: 20px;
-            text-decoration: none;
-            font-size: 12px;
-            color: #5d656b;
-
-            &.router-link-active {
-                color: #26a2ff;
-            }
+        i {
+            font-size: 24px;
         }
     }
 }

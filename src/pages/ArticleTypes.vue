@@ -5,31 +5,23 @@
         </Blogheader>
         <div class="article-type-list">
             <div class="article-type-list-box">
-                <span>全部</span>
-                <span v-for="(type, index) in types"
-                      :key="index"
-                      @click="getArticlesByType(type)">
+                <span @click="getArticlesByType(0)">全部</span>
+                <span v-for="(type, index) in types" :key="index" @click="getArticlesByType(type)">
                     {{ type }}
                 </span>
             </div>
         </div>
         <!-- <span>{{ articles.length }}</span> -->
         <div class="article-list">
-            <div v-if="articles.length === 0"
-                 :key="0">
+            <div v-if="articles.length === 0" :key="0">
                 暂无文章
             </div>
-            <div class="article-content"
-                 v-else
-                 v-for="(article, index) in articles"
-                 :key="article.id">
+            <div class="article-content" v-else v-for="(article, index) in articles" :key="article.id">
                 <div class="article-header">
                     <!-- 头像，用户名等 -->
-                    <router-link target="_blank"
-                                 :to="'/people/' + article.user.id">{{article.user.username}}</router-link>
+                    <router-link target="_blank" :to="'/people/' + article.user.id">{{article.user.username}}</router-link>
                     <span>{{ article.user.constellation }}</span>
-                    <span class="close"
-                          v-on:click="close(index)"></span>
+                    <span class="close" v-on:click="close(index)"></span>
                 </div>
                 <div class="article-text">
                     <!-- 正文内容 -->
@@ -61,14 +53,27 @@ export default {
     methods: {
         getArticlesByType (type) {
             var _this = this;
-            this.$ajax.get('/api/articles?type=' + type + '&_expand=user')
-                .then(function (response) {
-                    this.articles = response.data;
-                    console.log(response);
-                }.bind(this))
-                .catch(function (error) {
-                    console.log(error);
-                });
+
+            if (type == 0) {
+                console.log(type)
+                this.$ajax.get('/api/articles?_expand=user')
+                    .then(function (response) {
+                        this.articles = response.data;
+                        console.log(response);
+                    }.bind(this))
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            } else {
+                this.$ajax.get('/api/articles?type=' + type + '&_expand=user')
+                    .then(function (response) {
+                        this.articles = response.data;
+                        console.log(response);
+                    }.bind(this))
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
         },
         getTypes () {
             this.$ajax.get('/api/types')
@@ -85,8 +90,9 @@ export default {
         }
     },
     created () {
-        this.getTypes();
-        console.log(this.$router);
+        this.getTypes()
+        this.getArticlesByType(0)
+        console.log(this.$router)
     },
     components: {
         Blogheader,

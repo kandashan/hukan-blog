@@ -59,10 +59,12 @@ export default {
         getArticles () {
             var _this = this;
 
+            this.$indicator.open('加载中...')
             this.$ajax
                 .get("/api/articles/?_expand=user")
                 .then(
                 function (response) {
+                    this.$indicator.close()
                     this.articles = response.data;
                 }.bind(this)
                 )

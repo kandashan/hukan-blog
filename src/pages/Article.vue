@@ -48,10 +48,6 @@
                 </div>
             </div>
         </div>
-        <div class="comment-input-area" v-if="commentInputVisible">
-            <input type="text" @focus="commentInputFocus" placeholder="写下你的评论...">
-        </div>
-
         <!-- 发表评论 -->
         <div class="comment-publish" v-if="logined && commentTextareaVisible" @click="hideCommentTextarea">
             <div class="comment-publish-box">
@@ -64,6 +60,9 @@
         </div>
         <div class="article-footer">
             <!-- 功能区 -->
+            <div class="comment-input-area" v-if="commentInputVisible">
+                <input type="text" @focus="commentInputFocus" placeholder="写下你的评论...">
+            </div>
             <div class="navbar-nav">
                 <i class="fa fa-gift"></i>
                 <a href="javascript:;">赞赏</a>
