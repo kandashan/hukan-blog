@@ -1,16 +1,16 @@
 <template>
     <div class="navbar">
         <router-link class="navbar-nav" to="/" exact>
-            <i class="fa fa-fw fa-home"></i>
+            <i class="navbar-icon navbar-icon-home"></i>
         </router-link>
         <router-link class="navbar-nav" to="/articleTypes">
-            <i class="fa fa-fw fa-compass"></i>
+            <i class="navbar-icon navbar-icon-find"></i>
         </router-link>
         <router-link class="navbar-nav" to="/photos">
-            <i class="fa fa-fw fa-bell-o"></i>
+            <i class="navbar-icon navbar-icon-message"></i>
         </router-link>
         <router-link class="navbar-nav" to="/mine">
-            <i class="fa fa-fw fa-user-o"></i>
+            <i class="navbar-icon navbar-icon-mine"></i>
         </router-link>
     </div>
 </template>
@@ -44,8 +44,8 @@ export default {
 
     .navbar-nav {
         display: flex;
-        flex-direction: column;
         justify-content: center;
+        align-items: center;
         width: 20%;
         line-height: 45px;
         text-align: center;
@@ -54,10 +54,48 @@ export default {
 
         &.router-link-active {
             color: #26a2ff;
+
+            .navbar-icon-home {
+                background-image: url('./../assets/images/icon_tabbar_home_active.png');
+            }
+
+            .navbar-icon-find {
+                background-image: url('./../assets/images/icon_tabbar_find_active.png');
+            }
+
+            .navbar-icon-message {
+                background-image: url('./../assets/images/icon_tabbar_message_active.png');
+            }
+
+            .navbar-icon-mine {
+                background-image: url('./../assets/images/icon_tabbar_mine_active.png');
+            }
         }
 
         i {
-            font-size: 24px;
+            display: block;
+            width: 30px;
+            height: 30px;
+
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 30px;
+
+            &.navbar-icon-home {
+                background-image: url('./../assets/images/icon_tabbar_home.png');
+            }
+
+            &.navbar-icon-find {
+                background-image: url('./../assets/images/icon_tabbar_find.png');
+            }
+
+            &.navbar-icon-message {
+                background-image: url('./../assets/images/icon_tabbar_message.png');
+            }
+
+            &.navbar-icon-mine {
+                background-image: url('./../assets/images/icon_tabbar_mine.png');
+            }
         }
     }
 }
