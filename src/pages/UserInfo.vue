@@ -1,23 +1,31 @@
 <template>
-  <div>
-    用户信息
-    <button @click="logout">退出</button>
-  </div>
+    <div>
+        {{ logined }}
+        <div v-if="logined">
+            用户信息
+        </div>
+        <button @click="logout">退出</button>
+    </div>
 </template>
 
 <script>
 export default {
-  name: 'userinfo',
-  data(){
-    return {
-      logined: false
+    name: 'userinfo',
+    data () {
+        return {
+            msg: 'false'
+        }
+    },
+    computed: {
+        logined () {
+            return this.$store.state.logined;
+        }
+    },
+    methods: {
+        logout () {
+            this.$store.commit('logout');
+        }
     }
-  },
-  methods: {
-    logout(){
-      this.$store.commit('logout');
-    }
-  }
 }
 </script>
 
