@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
     name: 'userinfo',
     data () {
@@ -16,14 +18,15 @@ export default {
             msg: 'false'
         }
     },
-    computed: {
-        logined () {
-            return this.$store.state.logined;
-        }
-    },
+    computed: mapState([
+        'logined'
+    ]),
     methods: {
         logout () {
-            this.$store.commit('logout');
+            localStorage.removeItem('logined')
+            localStorage.removeItem('userInfo')
+            this.$store.commit('logout')
+            this.$router.replace({ path: '/' })
         }
     }
 }

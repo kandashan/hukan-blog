@@ -46,86 +46,86 @@ import banner3 from "./../assets/images/banner_3.jpg";
 import banner4 from "./../assets/images/banner_4.jpg";
 
 export default {
-  name: "hello",
-  data() {
-    return {
-      msg: "Welcome to Your Vue.js App",
-      logo: logo,
-      articles: [],
-      banners: [banner1, banner2, banner3, banner4]
-    };
-  },
-  methods: {
-    getArticles() {
-      var _this = this;
-      console.log("vuex store:" + this.$store.state.logined);
-      this.$ajax
-        .get("/api/articles/?_expand=user")
-        .then(
-          function(response) {
-            this.articles = response.data;
-            console.log(this.articles);
-          }.bind(this)
-        )
-        .catch(function(error) {
-          console.log(error);
-          console.log(_this.articles.length);
-        });
+    name: "hello",
+    data () {
+        return {
+            msg: "Welcome to Your Vue.js App",
+            logo: logo,
+            articles: [],
+            banners: [banner1, banner2, banner3, banner4]
+        };
     },
-    banner() {
-      console.log("banner");
+    methods: {
+        getArticles () {
+            var _this = this;
+
+            this.$indicator.open('加载中...')
+            this.$ajax
+                .get("/api/articles/?_expand=user")
+                .then(
+                function (response) {
+                    this.$indicator.close()
+                    this.articles = response.data;
+                }.bind(this)
+                )
+                .catch(function (error) {
+                    console.log(_this.articles.length);
+                });
+        },
+        banner () {
+            console.log("banner");
+        },
+        showCloseButton (event) {
+            // console.log(event.target.getElementsByClassName('close'));
+            // event.target.getElementsByClassName('close')[0].style.display = 'inline-block';
+        },
+        hideCloseButton (event) {
+            // event.target.getElementsByClassName('close')[0].style.display = 'none';
+        },
+        close (index) {
+            this.articles.splice(index, 1);
+        }
     },
-    showCloseButton(event) {
-      // console.log(event.target.getElementsByClassName('close'));
-      // event.target.getElementsByClassName('close')[0].style.display = 'inline-block';
+    created () {
+        this.getArticles();
+        window.fn();
     },
-    hideCloseButton(event) {
-      // event.target.getElementsByClassName('close')[0].style.display = 'none';
-    },
-    close(index) {
-      this.articles.splice(index, 1);
+    components: {
+        TodoList,
+        Blogheader,
+        Navbar
     }
-  },
-  created() {
-    this.getArticles();
-    window.fn();
-  },
-  components: {
-    TodoList,
-    Blogheader,
-    Navbar
-  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "./../assets/styles/base.scss";
-@import "./../assets/styles/articles.scss";
+@import './../assets/styles/base.scss';
+@import './../assets/styles/articles.scss';
 
 h1,
 h2 {
-  font-weight: normal;
+    font-weight: normal;
 }
 
 ul {
-  list-style-type: none;
-  padding: 0;
+    list-style-type: none;
+    padding: 0;
 }
 
 li {
-  display: inline-block;
-  margin: 0 10px;
+    display: inline-block;
+    margin: 0 10px;
 }
 
 .main {
-  .left {
-    float: left;
-    box-sizing: border-box;
+    .left {
+        float: left;
+        box-sizing: border-box;
 
-    .concent {
-      // margin-top: 20px;
+        .concent {
+            // margin-top: 20px;
+        }
     }
-  }
 }
 </style>

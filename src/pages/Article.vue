@@ -26,46 +26,48 @@
 
             <div class="comment-list">
                 <div class="comment-list-title">
-                    {{ comments.length }}条评论 {{ logined1 }}
+                    {{ comments.length }}条评论
                 </div>
-                <div class="comment-content"
-                     v-for="comment in comments"
-                     :key="comment.id">
-                    {{ comment.user.username }} {{ comment.time | moment }} {{ comment.text }}
+                <div class="comment-content" v-for="comment in comments" :key="comment.id">
+                    <div class="comment-title">
+                        <div class="comment-userheader">
+                            <img :src="comment.user.portrait" alt="portrait">
+                        </div>
+                        <div class="comment-userinfo">
+                            <div class="comment-username">
+                                {{ comment.user.username }}
+                            </div>
+                            <div class="comment-time">
+                                {{ comment.time | moment }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-text">
+                        {{ comment.text }}
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="comment-input-area"
-             v-if="commentInputVisible">
-            <input type="text">
-
-        </div>
-
         <!-- 发表评论 -->
-        <div class="comment-publish"
-             v-if="logined">
-            <div class="comment-publish-header">
-                <router-link :to="'/people/' + userInfo.id">{{ userInfo.username }}</router-link>
-                <span>{{ userInfo.word }}</span>
+        <div class="comment-publish" v-if="logined && commentTextareaVisible" @click="hideCommentTextarea">
+            <div class="comment-publish-box">
+                <textarea name="comment-publish-text" id="comment-publish-text" v-model="commentPublishText" ref="commentTextarea" placeholder="写下你的观点..."></textarea>
+                <button class="primary" v-on:click="publishComment">发表评论</button>
             </div>
-            <textarea name="comment-publish-text"
-                      id="comment-publish-text"
-                      v-model="commentPublishText"
-                      @focus="conmmentFocus"></textarea>
-            <button class="primary"
-                    v-on:click="publishComment">提交</button>
         </div>
         <div v-else>
             <router-link :to="'/login'">去登陆</router-link>
         </div>
         <div class="article-footer">
             <!-- 功能区 -->
+            <div class="comment-input-area" v-if="commentInputVisible">
+                <input type="text" @focus="commentInputFocus" placeholder="写下你的评论...">
+            </div>
             <div class="navbar-nav">
                 <i class="fa fa-gift"></i>
                 <a href="javascript:;">赞赏</a>
             </div>
-            <div class="navbar-nav"
-                 @click="showCommentInput">
+            <div class="navbar-nav" @click="showCommentInput">
                 <i class="fa fa-comment-o"></i>
                 <a href="javascript:;">评论</a>
             </div>
@@ -88,19 +90,19 @@ export default {
     data () {
         return {
             msg: 'article',
-            logined: false,
             userInfo: {},
             article: {
                 user: {}
             },
             comments: [],
-            commentPublishText: '写下你的观点...',
-            commentInputVisible: false
+            commentPublishText: '',
+            commentInputVisible: false,
+            commentTextareaVisible: false
         }
     },
     computed: {
-        logined1 () {
-            var logined = localStorage.logined;
+        logined () {
+            var logined = localStorage.getItem('logined');
             return this.$store.state.logined || logined;
         }
     },
@@ -129,12 +131,20 @@ export default {
         },
         getUserInfo: function () {
             if (this.$store.state.logined || localStorage.userInfo) {
-                this.logined = true;
                 this.userInfo = JSON.parse(localStorage.userInfo);
             }
         },
         showCommentInput () {
             this.commentInputVisible = !this.commentInputVisible
+        },
+        commentInputFocus () {
+            this.commentTextareaVisible = true
+            this.$nextTick(function () {
+                this.$refs.commentTextarea.focus()
+            })
+        },
+        hideCommentTextarea () {
+            this.commentTextareaVisible = false
         },
         publishComment: function () {
             var newComment = {
@@ -164,9 +174,6 @@ export default {
                 }.bind(this)).catch(function (error) {
                     console.log(error);
                 });
-        },
-        conmmentFocus () {
-            this.commentPublishText = '';
         }
     },
     created () {
@@ -218,55 +225,99 @@ export default {
         padding: 0 14px;
 
         .comment-list {
+            .comment-list-title {
+            }
+            .comment-content {
+                margin-top: 14px;
+                .comment-title {
+                    display: flex;
+
+                    .comment-userheader {
+                        width: 50px;
+
+                        img {
+                            display: block;
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                        }
+                    }
+
+                    .comment-userinfo {
+                        flex: 1;
+
+                        .comment-username {
+                            font-size: 14px;
+                            color: #101010;
+                        }
+
+                        .comment-time {
+                            margin-top: 8px;
+                            font-size: 12px;
+                            color: #999;
+                        }
+                    }
+                }
+                .comment-text {
+                    margin-top: 10px;
+                    font-size: 14px;
+                }
+            }
         }
     }
 
     // 评论输入框
     .comment-input-area {
-        width: 100%;
-        height: 45px;
         position: fixed;
+        right: 8px;
         bottom: 45px;
+        left: 8px;
+        height: 25px;
 
         input {
+            display: block;
+            width: 100%;
+            height: 25px;
+            line-height: 25px;
+            background-color: #f2f2f2;
+            border: none;
         }
     }
 
     // 发表评论
     .comment-publish {
-        padding-top: 16px;
-        border-top: 1px solid #888;
         position: fixed;
+        top: 0;
         right: 0;
-        bottom: 45px;
+        bottom: 0;
         left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
 
-        .comment-publish-header {
-            margin-bottom: 12px;
-
-            a {
-                text-decoration-line: none;
-                color: #2b2c2d;
-            }
-
-            span {
-                font-size: 12px;
-                color: #888;
-            }
-        }
-
-        textarea {
-            display: block;
-            padding: 12px 16px;
-            box-sizing: border-box;
-            width: 100%;
-            height: 100px;
-        }
-
-        button {
-            border: 1px solid #0f88eb;
+        .comment-publish-box {
+            position: fixed;
+            right: 0;
+            bottom: 45px;
+            left: 0;
+            padding: 16px 14px 10px;
             background-color: #fff;
-            color: #0f88eb;
+
+            textarea {
+                display: block;
+                padding: 10px;
+                box-sizing: border-box;
+                width: 100%;
+                height: 100px;
+            }
+
+            button {
+                float: right;
+                margin-top: 8px;
+                padding: 0 10px;
+                border: 1px solid #0f88eb;
+                background-color: #fff;
+                line-height: 24px;
+                color: #0f88eb;
+            }
         }
     }
 

@@ -1,31 +1,17 @@
 <template>
     <div class="navbar">
-        <div class="navbar-nav">
-            <i class="fa fa-home"></i>
-            <router-link to="/"
-                         exact>
-                首页
-            </router-link>
-        </div>
-        <div class="navbar-nav">
-            <i class="fa fa-compass"></i>
-            <router-link to="/articleTypes">
-                发现
-            </router-link>
-        </div>
-
-        <div class="navbar-nav">
-            <i class="fa fa-bell-o"></i>
-            <router-link to="/photos">
-                消息
-            </router-link>
-        </div>
-        <div class="navbar-nav">
-            <i class="fa fa-user-o"></i>
-            <router-link to="/mine">
-                我的
-            </router-link>
-        </div>
+        <router-link class="navbar-nav" to="/" exact>
+            <i class="navbar-icon navbar-icon-home"></i>
+        </router-link>
+        <router-link class="navbar-nav" to="/articleTypes">
+            <i class="navbar-icon navbar-icon-find"></i>
+        </router-link>
+        <router-link class="navbar-nav" to="/photos">
+            <i class="navbar-icon navbar-icon-message"></i>
+        </router-link>
+        <router-link class="navbar-nav" to="/mine">
+            <i class="navbar-icon navbar-icon-mine"></i>
+        </router-link>
     </div>
 </template>
 
@@ -58,27 +44,57 @@ export default {
 
     .navbar-nav {
         display: flex;
-        flex-direction: column;
         justify-content: center;
+        align-items: center;
         width: 20%;
         line-height: 45px;
         text-align: center;
+        text-decoration: none;
         color: #5d656b;
 
-        i {
-            // font-size: 24px;
+        &.router-link-active {
+            color: #26a2ff;
+
+            .navbar-icon-home {
+                background-image: url('./../assets/images/icon_tabbar_home_active.png');
+            }
+
+            .navbar-icon-find {
+                background-image: url('./../assets/images/icon_tabbar_find_active.png');
+            }
+
+            .navbar-icon-message {
+                background-image: url('./../assets/images/icon_tabbar_message_active.png');
+            }
+
+            .navbar-icon-mine {
+                background-image: url('./../assets/images/icon_tabbar_mine_active.png');
+            }
         }
 
-        a {
-            display: inline-block;
-            height: 20px;
-            line-height: 20px;
-            text-decoration: none;
-            font-size: 12px;
-            color: #5d656b;
+        i {
+            display: block;
+            width: 30px;
+            height: 30px;
 
-            &.router-link-active {
-                color: #26a2ff;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 30px;
+
+            &.navbar-icon-home {
+                background-image: url('./../assets/images/icon_tabbar_home.png');
+            }
+
+            &.navbar-icon-find {
+                background-image: url('./../assets/images/icon_tabbar_find.png');
+            }
+
+            &.navbar-icon-message {
+                background-image: url('./../assets/images/icon_tabbar_message.png');
+            }
+
+            &.navbar-icon-mine {
+                background-image: url('./../assets/images/icon_tabbar_mine.png');
             }
         }
     }
