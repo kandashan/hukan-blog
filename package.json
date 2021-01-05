@@ -10,7 +10,7 @@
         "data": "json-server --watch src/mock/data.js --port 9004"
     },
     "dependencies": {
-        "axios": "^0.16.2",
+        "axios": "^0.21.1",
         "font-awesome": "^4.7.0",
         "mint-ui": "^2.2.13",
         "moment": "^2.19.1",
